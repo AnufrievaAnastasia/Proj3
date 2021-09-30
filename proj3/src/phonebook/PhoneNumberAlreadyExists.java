@@ -6,9 +6,6 @@ public class PhoneNumberAlreadyExists extends Exception{
         super(message);
     }
 
-    public PhoneNumberAlreadyExists() {
-
-    }
 
 }
 

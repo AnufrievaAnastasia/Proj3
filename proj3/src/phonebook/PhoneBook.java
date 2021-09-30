@@ -45,8 +45,16 @@ public class PhoneBook {
     public void updateRecord(Record record) {
 
         try {
-            if (Objects.equals(record.getName(), "") | Objects.equals(record.getPhoneNumber(), "")) {
+            if (Objects.equals(record.getName(), " ") || Objects.equals(record.getPhoneNumber(), " ")) {
                 throw new RecordNotValid();
+
+
+            }
+
+            if (record.getName() == null || Objects.equals(record.getPhoneNumber(), null)) {
+                throw new RecordNotValid();
+
+
             }
 
             for (int i = 0; i < getAllRecords.size(); i++) {
@@ -63,32 +71,23 @@ public class PhoneBook {
                     }
                 }
             }
-        } catch (RecordNotFound | RecordNotValid exception) {
+
+        } catch (RecordNotValid exception) {
             System.out.println("Exception name: " + exception.toString());
         }
     }
 
 
     public void deleteRecord(long id){
-        try {
             for (int i = 0; i < getAllRecords.size(); i++) {
                 if (id == (getAllRecords.get(i).getId())) {
                     getAllRecords.remove(getAllRecords.get(i));
                     System.out.println("Контакт удален.");
+                    return;
                 }
-                if ((i + 1) == getAllRecords.size()) {
-                    if (id != (getAllRecords.get(i).getId())) {
-                        throw new RecordNotFound("Не существующий номер");
-                    } else {
-                        getAllRecords.remove(getAllRecords.get(i));
-                        System.out.println("Контакт удален.");
-                    }
-                }
-            }
-        }catch (RecordNotFound exception){
-            System.out.println("Exception exception: " + exception.toString());
 
-    }
+            }
+            throw new RecordNotFound("Не существующий номер");
 }
 }
 
